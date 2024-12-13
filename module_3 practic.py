@@ -4,6 +4,27 @@ def counting_data(data):
 
     for i in data:
         if isinstance(i, int):
-            quantity += 1
+            quantity += i
+        elif isinstance(i, str):
+            quantity += len(i)
+        elif isinstance(i, list):
+            quantity += counting_data(i)
+        elif isinstance(i, dict):
+            quantity += counting_data(i.keys())
+            quantity += counting_data(i.values())
+        elif isinstance(i, tuple):
+            quantity += counting_data(i)
+        elif isinstance(i, set):
+            quantity += counting_data(i)
     return quantity
-counting_data([1,12,3])
+
+data_structure = [
+  [1, 2, 3],
+  {'a': 4, 'b': 5},
+  (6, {'cube': 7, 'drum': 8}),
+  "Hello",
+  ((), [{(2, 'Urban', ('Urban2', 35))}])
+]
+result = counting_data(data_structure)
+print(result)
+
